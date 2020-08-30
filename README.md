@@ -1,5 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/{dksifoua}/{NMT}.png?branch=master)](https://travis-ci.org/{dksifoua}/{NMT})
+[![Build Status](https://travis-ci.com/dksifoua/NMT.svg?branch=master)](https://travis-ci.com/dksifoua/NMT.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/dksifoua/NMT/badge.svg?branch=master)](https://coveralls.io/github/dksifoua/NMT?branch=master)
 
 # Neural Machine Translation
 
