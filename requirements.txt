@@ -1,0 +1,8 @@
+codecov==2.1.9
+matplotlib==3.2.1
+numpy==1.18.4
+pandas==1.0.4
+torch==1.6.0+cpu
+torchvision==0.7.0+cpu
+tqdm==4.46.0
+wget==3.2
