@@ -6,6 +6,7 @@ from torchtext.data import Dataset, Field
 from torchtext.data.metrics import bleu_score
 from torchtext.data.iterator import BucketIterator
 from nmt.train.utils import accuracy, adjust_lr, AverageMeter, clip_gradient
+from nmt.utils.logger import Logger
 
 
 class Trainer:
@@ -34,6 +35,7 @@ class Trainer:
         self.train_iterator = None
         self.valid_iterator = None
         self.test_iterator = None
+        self.logger = Logger(name=f'{model.__class__.__name__}Trainer')
 
     def build_data_iterator(self, batch_size: int, device: torch.device):
         """
@@ -164,7 +166,7 @@ class Trainer:
         for epoch in range(n_epochs):
             # Stop training if no improvement since last 4 epochs
             if last_improvement == 4:
-                print('Training Finished - The model has stopped improving since last 4 epochs')
+                self.logger.info('Training Finished - The model has stopped improving since last 4 epochs')
                 break
             # Decay LR if no improvement
             if last_improvement > 0:

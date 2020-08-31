@@ -6,3 +6,22 @@
 # Neural Machine Translation
 
 State of the art of Neural Machine Translation with PyTorch and TorchText.
+
+## Quick start
+I used the `europarl-v7` parallel corpora to build models. The data is downloadable [here](http://www.statmt.org/europarl/v7/fr-en.tgz)!
+
+```shell
+> ./init.sh
+```
+
+## Modeling
+
+## Results
+
+### Training
+
+### Evaluation
+
+### Inference
+
+## References

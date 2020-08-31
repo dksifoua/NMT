@@ -1,8 +1,8 @@
 import torch
 import unittest
 import numpy as np
-from nmt.models.attention import BadhanauAttentionLayer
-from nmt.models.attention import LuongAttentionLayer
+from nmt.model.attention import BadhanauAttentionLayer
+from nmt.model.attention import LuongAttentionLayer
 
 
 class TestBadhanauAttentionLayer(unittest.TestCase):

@@ -1,8 +1,8 @@
 import torch
 import unittest
 import numpy as np
-from nmt.models.encoder import EncoderLayerLSTM
-from nmt.models.encoder import EncoderLayerBiLSTM
+from nmt.model.encoder import EncoderLayerLSTM
+from nmt.model.encoder import EncoderLayerBiLSTM
 
 
 class TestEncoderLayerLSTM(unittest.TestCase):
