@@ -2,11 +2,12 @@ language: python
 
 cache: pip
 
-python:
-  - "3.7"
+python: 3.7
 
-install: pip install -r requirements.txt
+install: 
+  - pip install -r requirements.txt
+  - pip install coverage
 
-script: python -m unittest tests
+script: coverage run -m unittest tests
 
 after_success: bash <(curl -s https://codecov.io/bash)
