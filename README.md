@@ -1,6 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.com/dksifoua/NMT.svg?branch=codecov)](https://travis-ci.com/dksifoua/NMT.svg?branch=codecov)
-[![Coverage Status](https://coveralls.io/repos/github/dksifoua/NMT/badge.svg?branch=codecov)](https://coveralls.io/github/dksifoua/NMT?branch=codecov)
+[![codecov](https://codecov.io/gh/dksifoua/NMT/branch/codecov/graph/badge.svg)](https://codecov.io/gh/dksifoua/NMT)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dksifoua/nmt/issues)
 
 # Neural Machine Translation
 
