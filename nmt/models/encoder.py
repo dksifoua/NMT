@@ -21,7 +21,7 @@ class EncoderLayerLSTM(nn.Module):
     """
 
     def __init__(self, embedding_size: int, hidden_size: int, vocab_size: int,
-                 n_layers: int, dropout: int, recurrent_dropout: int):
+                 n_layers: int, dropout: float, recurrent_dropout: float):
         if not (0 <= dropout < 1.0 and 0 <= recurrent_dropout < 1.0):
             raise ValueError('dropout and recurrent_dropout must be between 0 and 1.O.')
         super(EncoderLayerLSTM, self).__init__()
@@ -101,7 +101,7 @@ class EncoderLayerBiLSTM(nn.Module):
     """
 
     def __init__(self, embedding_size: int, hidden_size: int, vocab_size: int,
-                 n_layers: int, dropout: int, recurrent_dropout: int):
+                 n_layers: int, dropout: float, recurrent_dropout: float):
         if not (0 <= dropout < 1.0 and 0 <= recurrent_dropout < 1.0):
             raise ValueError('dropout and recurrent_dropout must be between 0 and 1.O.')
         super(EncoderLayerBiLSTM, self).__init__()

@@ -29,7 +29,7 @@ class TestLuongAttentionLayer(unittest.TestCase):
 
     def setUp(self) -> None:
         self.hidden_size = 16
-        self.attention = BadhanauAttentionLayer(hidden_size=self.hidden_size)
+        self.attention = LuongAttentionLayer(hidden_size=self.hidden_size)
 
     def test_forward(self):
         n_layers, batch_size, seq_len = 2, 16, 30
