@@ -164,4 +164,5 @@ class EncoderLayerBiLSTM(nn.Module):
         outputs = outputs[:, :, :self.hidden_size] + outputs[:, :, self.hidden_size:]
         h_state = h_state[:self.n_layers, :, :] + h_state[self.n_layers:, :, :]
         c_state = c_state[:self.n_layers, :, :] + c_state[self.n_layers:, :, :]
+        # assert outputs.shape[0] == input_sequences.shape[0], f'{input_sequences.shape}, {outputs.shape}'
         return outputs, (h_state, c_state)

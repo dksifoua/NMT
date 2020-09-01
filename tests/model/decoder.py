@@ -111,18 +111,18 @@ class TestBadhanauDecoderLayerLSTM(unittest.TestCase):
         self.dropout = 0.5
         self.embedding_dropout = 0.5
         self.recurrent_dropout = 0.5
-        self.decoder = LuongDecoderLayerLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
-                                             vocab_size=self.vocab_size, n_layers=self.n_layers, dropout=self.dropout,
-                                             embedding_dropout=self.embedding_dropout,
-                                             recurrent_dropout=self.recurrent_dropout,
-                                             attention_layer=LuongAttentionLayer(hidden_size=self.hidden_size))
+        self.decoder = BadhanauDecoderLayerLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
+                                                vocab_size=self.vocab_size, n_layers=self.n_layers,
+                                                dropout=self.dropout, embedding_dropout=self.embedding_dropout,
+                                                recurrent_dropout=self.recurrent_dropout,
+                                                attention_layer=BadhanauAttentionLayer(hidden_size=self.hidden_size))
 
     def test_build_model(self):
         with self.assertRaises(ValueError):
-            _ = LuongDecoderLayerLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
-                                      vocab_size=self.vocab_size, n_layers=self.n_layers, dropout=-0.1,
-                                      embedding_dropout=1.1, recurrent_dropout=1.2,
-                                      attention_layer=LuongAttentionLayer(hidden_size=self.hidden_size))
+            _ = BadhanauDecoderLayerLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
+                                         vocab_size=self.vocab_size, n_layers=self.n_layers, dropout=-0.1,
+                                         embedding_dropout=1.1, recurrent_dropout=1.2,
+                                         attention_layer=BadhanauAttentionLayer(hidden_size=self.hidden_size))
 
     def test_load_embeddings(self):
         with self.assertRaises(ValueError):

@@ -1,13 +1,12 @@
-from tests.model.encoder import TestEncoderLayerLSTM
-from tests.model.encoder import TestEncoderLayerBiLSTM
-from tests.model.attention import TestBadhanauAttentionLayer
-from tests.model.attention import TestLuongAttentionLayer
-from tests.model.decoder import TestDecoderLayerLSTM
-from tests.model.decoder import TestLuongDecoderLayerLSTM
-from tests.model.decoder import TestBadhanauDecoderLayerLSTM
-from tests.model.seq2seq import TestSeqToSeqLSTM
+from tests.model.encoder import TestEncoderLayerLSTM, TestEncoderLayerBiLSTM
+from tests.model.attention import TestBadhanauAttentionLayer, TestLuongAttentionLayer
+from tests.model.decoder import TestDecoderLayerLSTM, TestLuongDecoderLayerLSTM, TestBadhanauDecoderLayerLSTM
+from tests.model.seq2seq import TestSeqToSeqLSTM, TestSeqToSeqBiLSTM, TestSeqToSeqLuongAttentionLSTM
+from tests.model.seq2seq import TestSeqToSeqBadhanauAttentionLSTM
 
 __all__ = [
-    'TestEncoderLayerLSTM', 'TestEncoderLayerBiLSTM', 'TestBadhanauAttentionLayer', 'TestLuongAttentionLayer',
-    'TestDecoderLayerLSTM', 'TestLuongDecoderLayerLSTM', 'TestBadhanauDecoderLayerLSTM', 'TestSeqToSeqLSTM'
+    'TestEncoderLayerLSTM', 'TestEncoderLayerBiLSTM',
+    'TestBadhanauAttentionLayer', 'TestLuongAttentionLayer',
+    'TestDecoderLayerLSTM', 'TestLuongDecoderLayerLSTM', 'TestBadhanauDecoderLayerLSTM',
+    'TestSeqToSeqLSTM', 'TestSeqToSeqBiLSTM', 'TestSeqToSeqLuongAttentionLSTM', 'TestSeqToSeqBadhanauAttentionLSTM'
 ]

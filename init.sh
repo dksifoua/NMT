@@ -7,6 +7,7 @@ python -m spacy download en_core_web_lg
 
 mkdir -p ./data
 mkdir -p ./checkpoint
+mkdir -p ./log
 
 wget --no-check-certificate \
     http://www.statmt.org/europarl/v7/fr-en.tgz \

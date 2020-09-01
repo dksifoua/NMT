@@ -159,7 +159,7 @@ class LuongDecoderLayerLSTM(nn.Module):
             h_state: torch.FloatTensor[n_layers, batch_size, hidden_size]
             c_state: torch.FloatTensor[n_layers, batch_size, hidden_size]
             enc_outputs: torch.FloatTensor[seq_len, batch_size, hidden_size]
-            mask:
+            mask: torch.BoolTensor[seq_len, batch_size, 1]
 
         Returns:
             logit: torch.FloatTensor[batch_size, vocab_size]
@@ -230,7 +230,7 @@ class BadhanauDecoderLayerLSTM(nn.Module):
         self.embedding_dropout = embedding_dropout
         self.recurrent_dropout = recurrent_dropout
         self.attention_layer = attention_layer
-        self.embeddings = nn.Embedding(num_embeddings=vocab_size, embedding_dim=embedding_size)
+        self.embedding = nn.Embedding(num_embeddings=vocab_size, embedding_dim=embedding_size)
         self.lstm = nn.LSTM(input_size=embedding_size + hidden_size, hidden_size=hidden_size, num_layers=n_layers,
                             dropout=(recurrent_dropout if n_layers > 1 else 0))
         self.fc = nn.Linear(in_features=hidden_size, out_features=vocab_size)
@@ -247,7 +247,7 @@ class BadhanauDecoderLayerLSTM(nn.Module):
         """
         if embeddings.size() != torch.Size([self.vocab_size, self.embedding_size]):
             raise ValueError('The dimensions of embeddings don\'t match.')
-        self.embeddings.weight = nn.Parameter(embeddings)
+        self.embedding.weight = nn.Parameter(embeddings)
 
     def fine_tune_embeddings(self, fine_tune: bool = False):
         """
@@ -257,7 +257,7 @@ class BadhanauDecoderLayerLSTM(nn.Module):
             fine_tune: bool, optional
                 Default: False.
         """
-        for param in self.embeddings.parameters():
+        for param in self.embedding.parameters():
             param.requires_grad = fine_tune
 
     def forward(self, input_word_index: torch.IntTensor, h_state: torch.FloatTensor, c_state: torch.FloatTensor,
