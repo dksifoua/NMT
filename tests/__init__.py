@@ -5,8 +5,9 @@ from tests.model.attention import TestLuongAttentionLayer
 from tests.model.decoder import TestDecoderLayerLSTM
 from tests.model.decoder import TestLuongDecoderLayerLSTM
 from tests.model.decoder import TestBadhanauDecoderLayerLSTM
+from tests.model.seq2seq import TestSeqToSeqLSTM
 
 __all__ = [
     'TestEncoderLayerLSTM', 'TestEncoderLayerBiLSTM', 'TestBadhanauAttentionLayer', 'TestLuongAttentionLayer',
-    'TestDecoderLayerLSTM', 'TestLuongDecoderLayerLSTM', 'TestBadhanauDecoderLayerLSTM'
+    'TestDecoderLayerLSTM', 'TestLuongDecoderLayerLSTM', 'TestBadhanauDecoderLayerLSTM', 'TestSeqToSeqLSTM'
 ]
