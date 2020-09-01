@@ -22,15 +22,7 @@ class TestEncoderLayerLSTM(unittest.TestCase):
         with self.assertRaises(ValueError):
             _ = EncoderLayerLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
                                  vocab_size=self.vocab_size, n_layers=self.n_layers,
-                                 dropout=1.2, recurrent_dropout=-0.1)
-        with self.assertRaises(ValueError):
-            _ = EncoderLayerLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
-                                 vocab_size=self.vocab_size, n_layers=self.n_layers,
-                                 dropout=0.2, recurrent_dropout=-0.1)
-        with self.assertRaises(ValueError):
-            _ = EncoderLayerLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
-                                 vocab_size=self.vocab_size, n_layers=self.n_layers,
-                                 dropout=-0.2, recurrent_dropout=0.1)
+                                 dropout=-0.1, recurrent_dropout=1.1)
 
     def test_load_embeddings(self):
         with self.assertRaises(ValueError):
@@ -45,7 +37,7 @@ class TestEncoderLayerLSTM(unittest.TestCase):
             self.assertTrue(param.requires_grad)
 
     def test_forward(self):
-        seq_len, batch_size = 10, 16
+        seq_len, batch_size = 1, 16
         input_sequences = torch.randint(low=0, high=self.vocab_size, size=(seq_len, batch_size))
         sequence_lengths = torch.randint(low=1, high=seq_len + 1, size=(batch_size,))
         sequence_lengths, sorted_indices = torch.sort(sequence_lengths, dim=0, descending=True)
@@ -77,15 +69,7 @@ class TestEncoderLayerBiLSTM(unittest.TestCase):
         with self.assertRaises(ValueError):
             _ = EncoderLayerBiLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
                                    vocab_size=self.vocab_size, n_layers=self.n_layers,
-                                   dropout=1.2, recurrent_dropout=-0.1)
-        with self.assertRaises(ValueError):
-            _ = EncoderLayerBiLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
-                                   vocab_size=self.vocab_size, n_layers=self.n_layers,
-                                   dropout=0.2, recurrent_dropout=-0.1)
-        with self.assertRaises(ValueError):
-            _ = EncoderLayerBiLSTM(embedding_size=self.embedding_size, hidden_size=self.hidden_size,
-                                   vocab_size=self.vocab_size, n_layers=self.n_layers,
-                                   dropout=-0.2, recurrent_dropout=0.1)
+                                   dropout=-0.1, recurrent_dropout=1.1)
 
     def test_load_embeddings(self):
         with self.assertRaises(ValueError):
@@ -100,7 +84,7 @@ class TestEncoderLayerBiLSTM(unittest.TestCase):
             self.assertTrue(param.requires_grad)
 
     def test_forward(self):
-        seq_len, batch_size = 10, 16
+        seq_len, batch_size = 1, 16
         input_sequences = torch.randint(low=0, high=self.vocab_size, size=(seq_len, batch_size))
         sequence_lengths = torch.randint(low=1, high=seq_len + 1, size=(batch_size,))
         sequence_lengths, sorted_indices = torch.sort(sequence_lengths, dim=0, descending=True)

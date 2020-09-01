@@ -60,7 +60,7 @@ class EncoderLayerLSTM(nn.Module):
 
     def forward(self, input_sequences: torch.IntTensor, sequence_lengths: torch.IntTensor):
         """
-        Pass inputs through the model
+        Pass inputs through the model.
 
         Args:
             input_sequences (torch.IntTensor[seq_len, batch_size]):
