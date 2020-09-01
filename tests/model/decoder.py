@@ -98,7 +98,7 @@ class TestLuongDecoderLayerLSTM(unittest.TestCase):
         self.assertEqual(logit.size(), torch.Size([batch_size, self.vocab_size]))
         self.assertEqual(h_state.size(), torch.Size([self.n_layers, batch_size, self.hidden_size]))
         self.assertEqual(c_state.size(), torch.Size([self.n_layers, batch_size, self.hidden_size]))
-        self.assertEqual(attention_weights.size(), torch.Size([self.n_layers, batch_size, 1]))
+        self.assertEqual(attention_weights.size(), torch.Size([seq_len, batch_size]))
 
 
 class TestBadhanauDecoderLayerLSTM(unittest.TestCase):
@@ -148,4 +148,4 @@ class TestBadhanauDecoderLayerLSTM(unittest.TestCase):
         self.assertEqual(logit.size(), torch.Size([batch_size, self.vocab_size]))
         self.assertEqual(h_state.size(), torch.Size([self.n_layers, batch_size, self.hidden_size]))
         self.assertEqual(c_state.size(), torch.Size([self.n_layers, batch_size, self.hidden_size]))
-        self.assertEqual(attention_weights.size(), torch.Size([self.n_layers, batch_size, 1]))
+        self.assertEqual(attention_weights.size(), torch.Size([seq_len, batch_size]))

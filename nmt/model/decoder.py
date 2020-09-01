@@ -118,7 +118,7 @@ class LuongDecoderLayerLSTM(nn.Module):
         self.embedding_dropout = embedding_dropout
         self.recurrent_dropout = recurrent_dropout
         self.attention_layer = attention_layer
-        self.embeddings = nn.Embedding(num_embeddings=vocab_size, embedding_dim=embedding_size)
+        self.embedding = nn.Embedding(num_embeddings=vocab_size, embedding_dim=embedding_size)
         self.lstm = nn.LSTM(input_size=embedding_size, hidden_size=hidden_size, num_layers=n_layers,
                             dropout=(recurrent_dropout if n_layers > 1 else 0))
         self.fc1 = nn.Linear(in_features=hidden_size * 2, out_features=hidden_size)
@@ -136,7 +136,7 @@ class LuongDecoderLayerLSTM(nn.Module):
         """
         if embeddings.size() != torch.Size([self.vocab_size, self.embedding_size]):
             raise ValueError('The dimensions of embeddings don\'t match.')
-        self.embeddings.weight = nn.Parameter(embeddings)
+        self.embedding.weight = nn.Parameter(embeddings)
 
     def fine_tune_embeddings(self, fine_tune: bool = False):
         """
@@ -146,7 +146,7 @@ class LuongDecoderLayerLSTM(nn.Module):
             fine_tune: bool, optional
                 Default: False.
         """
-        for param in self.embeddings.parameters():
+        for param in self.embedding.parameters():
             param.requires_grad = fine_tune
 
     def forward(self, input_word_index: torch.IntTensor, h_state: torch.FloatTensor, c_state: torch.FloatTensor,
@@ -165,7 +165,7 @@ class LuongDecoderLayerLSTM(nn.Module):
             logit: torch.FloatTensor[batch_size, vocab_size]
             h_state: torch.FloatTensor[n_layers, batch_size, hidden_size]
             c_state: torch.FloatTensor[n_layers, batch_size, hidden_size]
-            attention_weights: torch.FloatTensor[n_layers, batch_size, 1]
+            attention_weights: torch.FloatTensor[seq_len, batch_size, 1]
         """
         embedded = self.embedding(input_word_index.unsqueeze(0))
         embedded = F.dropout(embedded, p=self.embedding_dropout)
