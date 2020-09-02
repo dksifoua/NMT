@@ -1,0 +1,23 @@
+2020-09-02 15:26:50,602 - INFO - LOAD AND CLEAN DATA
+2020-09-02 15:27:39,079 - INFO - Number of examples: 2,007,723
+2020-09-02 15:27:49,315 - INFO - Number of examples after sampling: 200,000
+2020-09-02 15:27:49,316 - INFO - Example:
+	FR => La Commission peut approuver cette proposition, notamment parce que les mesures techniques de mise en œuvre de la directive «MiFID» sont essentielles pour une application efficace de cette directive.
+	EN => The Commission can go along with this, particularly because the technical implementing measures for the MiFID are essential for the effective application of this directive.
+2020-09-02 15:27:50,433 - INFO - Number of examples after filtering: 89,479
+2020-09-02 15:27:50,798 - INFO - BUILD EXAMPLES
+2020-09-02 15:29:28,657 - INFO - Number of examples: 89,479
+2020-09-02 15:29:28,658 - INFO - BUILD DATASETS
+2020-09-02 15:29:28,832 - INFO - train set size: 80,531
+2020-09-02 15:29:28,832 - INFO - valid set size: 4,474
+2020-09-02 15:29:28,860 - INFO - test set size: 4,474
+2020-09-02 15:29:29,056 - INFO - BUILD VOCAB
+2020-09-02 15:29:29,873 - INFO - Length of fr vocabulary: 12,005
+2020-09-02 15:29:29,891 - INFO - BUILD VOCAB
+2020-09-02 15:29:30,567 - INFO - Length of en vocabulary: 9,366
+2020-09-02 15:29:31,109 - INFO - Saved fr_field field.
+2020-09-02 15:29:31,413 - INFO - Saved en_field field.
+2020-09-02 15:29:31,414 - INFO - SAVE DATASETS
+2020-09-02 15:29:59,540 - INFO - Saved train field.
+2020-09-02 15:30:00,942 - INFO - Saved valid field.
+2020-09-02 15:30:02,682 - INFO - Saved test field.

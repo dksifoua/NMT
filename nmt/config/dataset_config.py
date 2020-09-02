@@ -4,3 +4,4 @@ class DatasetConfig:
     N_SAMPLES = 200_000
     MIN_LEN = 10
     MAX_LEN = 25
+    MIN_FREQ = 5
