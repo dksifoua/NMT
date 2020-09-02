@@ -1,11 +1,14 @@
+import os
 import tqdm
 import torch
+import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 from torchtext.data import Dataset, Field
 from torchtext.data.metrics import bleu_score
 from torchtext.data.iterator import BucketIterator
-from nmt.train.utils import accuracy, adjust_lr, AverageMeter, clip_gradient
+from nmt.train.utils import accuracy, adjust_lr, adjust_tf, AverageMeter, clip_gradient, load, save
+from nmt.config.global_config import GlobalConfig
 from nmt.utils.logger import Logger
 
 
@@ -94,18 +97,24 @@ class Trainer:
             # Update progressbar description
             progress_bar.set_description(
                 f'Epoch: {epoch + 1:03d} - loss: {loss_tracker.average:.3f} - acc: {acc_tracker.average:.3f}%')
+            self.logger.debug(
+                f'Epoch: {epoch + 1:03d} - loss: {loss_tracker.average:.3f} - acc: {acc_tracker.average:.3f}%')
         return loss_tracker.average, acc_tracker.average
 
     def validate(self, epoch: int):
         """
 
         Args:
-            epoch (int): the epoch number.
+            epoch: int
+                The epoch number.
 
         Returns:
-            loss (float): the validation loss.
-            acc (float): the validation top-5 accuracy.
-            bleu-4 (float): the validation BLEU score.
+            loss: float
+                The validation loss.
+            acc: float
+                The validation top-5 accuracy.
+            bleu-4: float
+                The validation BLEU score.
         """
         references, hypotheses = [], []
         loss_tracker, acc_tracker = AverageMeter(), AverageMeter()
@@ -152,37 +161,51 @@ class Trainer:
                 progress_bar.set_description(
                     f'Epoch: {epoch + 1:03d} - val_loss: {loss_tracker.average:.3f}'
                     f' - val_acc: {acc_tracker.average:.3f}%')
+                self.logger.debug(f'Epoch: {epoch + 1:03d} - val_loss: {loss_tracker.average:.3f}'
+                                  f' - val_acc: {acc_tracker.average:.3f}%')
             # Calculate BLEU-4 score
             bleu4 = bleu_score(hypotheses, references, max_n=4, weights=[0.25, 0.25, 0.25, 0.25])
-            # TODO
-            #   Display some examples
+            # Display some examples
+            for i in np.random.choice(len(self.valid_iterator), size=3, replace=False):
+                src, dest = ' '.join(references[i][0]), ' '.join(hypotheses[i])
+                self.logger.debug(f'Ground truth translation: {src}')
+                self.logger.debug(f'Predicted translation: {dest}')
+                self.logger.debug('=' * 100)
         return loss_tracker.average, acc_tracker.average, bleu4
 
     def train(self, n_epochs: int, grad_clip: float, tf_ratio: float):
-        # TODO
-        #   Load the saved model if exits to continue the training.
-        last_improvement = 0
+        if f'Best_{self.model.__class__.__name__}.pth' in os.listdir(GlobalConfig.CHECKPOINT_PATH):
+            model_state_dict, optim_state_dict, last_improvement = load(self.model.__class__.__name__)
+            self.model.load_state_dict(model_state_dict)
+            self.optimizer.load_state_dict(optim_state_dict)
+            self.logger.debug('The model is loaded!')
+        else:
+            last_improvement = 0
         history, best_bleu = {'acc': [], 'loss': [], 'val_acc': [], 'val_loss': [], 'bleu4': []}, 0.
         for epoch in range(n_epochs):
-            # Stop training if no improvement since last 4 epochs
-            if last_improvement == 4:
-                self.logger.info('Training Finished - The model has stopped improving since last 4 epochs')
+            if last_improvement == 4:  # Stop training if no improvement since last 4 epochs
+                self.logger.debug('Training Finished - The model has stopped improving since last 4 epochs')
                 break
-            # Decay LR if no improvement
-            if last_improvement > 0:
-                adjust_lr(optimizer=self.optimizer, shrink_factor=0.9, verbose=True)
-            # Train step
-            loss, acc = self.train_step(epoch=epoch, grad_clip=grad_clip, tf_ratio=tf_ratio)
-            # Validation step
-            val_loss, val_acc, bleu4 = self.validate(epoch=epoch)
+            if last_improvement > 0:  # Decay LR if no improvement
+                adjust_lr(optimizer=self.optimizer, shrink_factor=0.9, verbose=True, logger=self.logger)
+            loss, acc = self.train_step(epoch=epoch, grad_clip=grad_clip, tf_ratio=tf_ratio)  # Train step
+            val_loss, val_acc, bleu4 = self.validate(epoch=epoch)  # Validation step
             # Update history dict
             history['acc'].append(acc)
             history['loss'].append(loss)
             history['val_acc'].append(val_acc)
             history['val_loss'].append(val_loss)
             history['bleu4'].append(bleu4)
-            # TODO
-            #   Print BLEU score
-            #   Adjust the teacher forcing rate
-            #   Save model
+            # Print BLEU score
+            text = f'BLEU-4: {bleu4 * 100:.3f}%'
+            if bleu4 > best_bleu:
+                best_bleu, last_improvement = bleu4, 0
+            else:
+                last_improvement += 1
+                text += f' - Last improvement since {last_improvement} epoch(s)'
+            self.logger.debug(text)
+            # Decrease teacher forcing rate
+            tf_ratio = adjust_tf(tf_ratio=tf_ratio, shrink_factor=0.8, verbose=False)
+            # Checkpoint
+            save(model=self.model, optimizer=self.optimizer, last_improvement=last_improvement, bleu4=bleu4)
         return history

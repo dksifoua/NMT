@@ -1,4 +1,5 @@
 class GlobalConfig:
     DATA_PATH = './data'
-    CHECKPOINT_PATH = './checkpoint'
-    LOG_PATH = './log'
+    CHECKPOINT_PATH = './checkpoints'
+    LOG_PATH = './logs'
+    IMG_PATH = './images'

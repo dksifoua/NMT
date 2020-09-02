@@ -5,9 +5,10 @@ python -m spacy download en
 python -m spacy download fr_core_news_lg
 python -m spacy download en_core_web_lg
 
+mkdir -p ./checkpoints
 mkdir -p ./data
-mkdir -p ./checkpoint
-mkdir -p ./log
+mkdir -p ./images
+mkdir -p ./logs
 
 wget --no-check-certificate \
     http://www.statmt.org/europarl/v7/fr-en.tgz \
