@@ -1,0 +1,14 @@
+class EncoderLSTMConfig:
+    EMBEDDING_SIZE = 300
+    HIDDEN_SIZE = 256
+    N_LAYERS = 3
+    EMBEDDING_DROPOUT = 0.
+    REC_DROPOUT = 0.25
+
+
+class DecoderLSTMConfig:
+    EMBEDDING_SIZE = 300
+    HIDDEN_SIZE = 256
+    N_LAYERS = 3
+    EMBEDDING_DROPOUT = 0.
+    REC_DROPOUT = 0.25

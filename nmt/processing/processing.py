@@ -4,6 +4,7 @@ import dill
 import tqdm
 import pickle
 from unicodedata import normalize
+import torch
 import numpy as np
 from torchtext.data import Dataset, Example, Field
 from nmt.config.global_config import GlobalConfig

@@ -26,19 +26,19 @@ class Trainer:
         test_data (Dataset): test dataset.
     """
 
-    def __init__(self, model: nn.Module, optimizer: optim.Optimizer, criterion: nn.Module,
-                 field: Field, train_data: Dataset, valid_data: Dataset, test_data: Dataset):
+    def __init__(self, model: nn.Module, optimizer: optim.Optimizer, criterion: nn.Module, dest_field: Field,
+                 train_data: Dataset, valid_data: Dataset, test_data: Dataset, logger: Logger):
         self.model = model
         self.optimizer = optimizer
         self.criterion = criterion
-        self.field = field
+        self.dest_field = dest_field
         self.train_data = train_data
         self.valid_data = valid_data
         self.test_data = test_data
+        self.logger = logger
         self.train_iterator = None
         self.valid_iterator = None
         self.test_iterator = None
-        self.logger = Logger(name=f'{model.__class__.__name__}Trainer')
 
     def build_data_iterator(self, batch_size: int, device: torch.device):
         """
@@ -141,20 +141,20 @@ class Trainer:
                 target_sequences = data.dest[0].t()[sorted_indices]
                 for j in range(target_sequences.size(0)):
                     target_sequence = target_sequences[j].tolist()
-                    reference = [self.field.vocab.itos[indice] for indice in target_sequence if indice not in (
-                        self.field.vocab.stoi[self.field.init_token],
-                        self.field.vocab.stoi[self.field.pad_token]
+                    reference = [self.dest_field.vocab.itos[indice] for indice in target_sequence if indice not in (
+                        self.dest_field.vocab.stoi[self.dest_field.init_token],
+                        self.dest_field.vocab.stoi[self.dest_field.pad_token]
                     )]
                     references.append([reference])
                 # Update hypotheses
                 _, predictions = torch.max(logits_copy, dim=2)
                 predictions = predictions.t().tolist()
                 for j, p in enumerate(predictions):
-                    hypotheses.append([self.field.vocab.itos[indice]
+                    hypotheses.append([self.dest_field.vocab.itos[indice]
                                        for indice in predictions[j][:sorted_decode_lengths[j]]  # Remove padding
                                        if indice not in (
-                                           self.field.vocab.stoi[self.field.init_token],
-                                           self.field.vocab.stoi[self.field.pad_token]
+                                           self.dest_field.vocab.stoi[self.dest_field.init_token],
+                                           self.dest_field.vocab.stoi[self.dest_field.pad_token]
                                        )])
                 assert len(references) == len(hypotheses)
                 # Update progressbar description

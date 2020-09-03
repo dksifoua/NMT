@@ -32,7 +32,7 @@ if __name__ == '__main__':
                 special_tokens=['<unk>', '<pad>'], logger=logger)
     build_vocab(field=dest_field, lang=args.dest_lang, train_data=train_dataset, min_freq=args.min_freq,
                 special_tokens=['<sos>', '<eos>', '<unk>', '<pad>'], logger=logger)
-    save_field(field=src_field, lang=args.src_lang, filename=f'{args.src_lang}_field', logger=logger)
-    save_field(field=dest_field, lang=args.dest_lang, filename=f'{args.dest_lang}_field', logger=logger)
+    save_field(field=src_field, lang=args.src_lang, filename=f'{args.src_lang}', logger=logger)
+    save_field(field=dest_field, lang=args.dest_lang, filename=f'{args.dest_lang}', logger=logger)
     save_datasets(datasets=[train_dataset, valid_dataset, test_dataset], filenames=['train', 'valid', 'test'],
                   logger=logger)
