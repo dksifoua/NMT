@@ -1,11 +1,16 @@
+import os
 import argparse
+import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
+import torch.optim as optim
 from nmt.config.dataset_config import DatasetConfig
+from nmt.config.global_config import GlobalConfig
 from nmt.config.train_config import TrainConfig
 from nmt.config.model_config import EncoderLSTMConfig, DecoderLSTMConfig
-from nmt.processing.processing import load_field
+from nmt.processing.processing import load_dataset, load_field
 from nmt.train.trainer import Trainer
+from nmt.train.optim_utils import LRFinder
 from nmt.utils.logger import Logger
 from typing import Any
 
@@ -47,18 +52,54 @@ if __name__ == '__main__':
     parser.add_argument('--tf_ratio', action='store', type=str,
                         help=f'The teacher forcing ratio. Default: {TrainConfig.TF_RATIO}.')
     args = parser.parse_args()
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    module = getattr(__import__('nmt.model'), 'model')
     logger = Logger(name=f'Train{args.model}')
-    # TODO
-    #   Review save and load field
-    #   Review save and load dataset
-    scr_field = load_field(filename=f'{args.src_lang}')
+    criterion = nn.CrossEntropyLoss()
+
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    logger.info(f'Device: {device}')
+
+    module = getattr(__import__('nmt.model'), 'model')
+
+    logger.info('Load Fields')
+    src_field = load_field(filename=f'{args.src_lang}')
     dest_field = load_field(filename=f'{args.dest_lang}')
+
+    logger.info('Init the model')
     if args.model == 'SeqToSeqLSTM':
-        model = init_seq_to_seq_lstm_model(_module=module, _src_vocab_size=len(scr_field.vocab),
+        model = init_seq_to_seq_lstm_model(_module=module, _src_vocab_size=len(src_field.vocab),
                                            _dest_vocab_size=len(dest_field.vocab), _device=device)
-        model.to(device=device)
-        logger.debug(str(model))
     else:
         raise ValueError(f'The {args.model} has not been implemented!')
+    # TODO
+    #   Add other model initialization
+    #   Add word vector embeddings
+    #   Add xavier init weights
+    model.to(device)
+    logger.debug(str(model))
+
+    logger.info('Init the optimizer')
+    optimizer = optim.RMSprop(params=model.parameters(), lr=TrainConfig.INIT_LR)
+
+    logger.info('Load datasets')
+    train_dataset = load_dataset(filename='train', src_field=src_field, dest_field=dest_field, logger=logger)
+    valid_dataset = load_dataset(filename='valid', src_field=src_field, dest_field=dest_field, logger=logger)
+    test_dataset = load_dataset(filename='test', src_field=src_field, dest_field=dest_field, logger=logger)
+
+    logger.info('Suggest a good learning rate')
+    lr_finder = LRFinder(model=model, optimizer=optimizer, criterion=criterion, logger=logger,
+                         grad_clip=TrainConfig.GRAD_CLIP)
+    lr_finder.range_test(data_loader=train_dataset, end_lr=TrainConfig.END_LR, n_iters=TrainConfig.N_ITERS)
+    fig = plt.figure(figsize=(15, 5))
+    ax = fig.add_subplot(1, 1, 1)
+    ax, lr = lr_finder.plot(ax=ax)
+    plt.savefig(os.path.join(GlobalConfig.IMG_PATH, f'SuggestedLR_{args.model}.png'))
+
+    logger.info('Init trainer')
+    trainer = Trainer(model=model, optimizer=optimizer, criterion=criterion, dest_field=dest_field,
+                      train_data=train_dataset, valid_data=valid_dataset, test_data=test_dataset, logger=logger)
+
+    logger.info('Build data iterators')
+    trainer.build_data_iterator(batch_size=TrainConfig.BATCH_SIZE, device=device)
+
+    logger.info('Start training...')
+    history = trainer.train(n_epochs=1, grad_clip=TrainConfig.GRAD_CLIP, tf_ratio=TrainConfig.TF_RATIO)

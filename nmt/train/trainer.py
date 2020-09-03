@@ -7,7 +7,7 @@ import torch.optim as optim
 from torchtext.data import Dataset, Field
 from torchtext.data.metrics import bleu_score
 from torchtext.data.iterator import BucketIterator
-from nmt.train.utils import accuracy, adjust_lr, adjust_tf, AverageMeter, clip_gradient, load, save
+from nmt.train.train_utils import accuracy, adjust_lr, adjust_tf, AverageMeter, clip_gradient, load, save
 from nmt.config.global_config import GlobalConfig
 from nmt.utils.logger import Logger
 
@@ -20,7 +20,6 @@ class Trainer:
         model (nn.Module): the wrapped model.
         optimizer (optim.Optimizer): the wrapped optimizer.
         criterion (nn.Module): the wrapped loss function.
-        field (Field): Language manager.
         train_data (Dataset): train dataset.
         valid_data (Dataset): valid dataset.
         test_data (Dataset): test dataset.
@@ -169,8 +168,8 @@ class Trainer:
             for i in np.random.choice(len(self.valid_iterator), size=3, replace=False):
                 src, dest = ' '.join(references[i][0]), ' '.join(hypotheses[i])
                 self.logger.debug(f'Ground truth translation: {src}')
-                self.logger.debug(f'Predicted translation: {dest}')
-                self.logger.debug('=' * 100)
+                self.logger.info(f'Predicted translation: {dest}')
+                self.logger.info('=' * 100)
         return loss_tracker.average, acc_tracker.average, bleu4
 
     def train(self, n_epochs: int, grad_clip: float, tf_ratio: float):
@@ -178,13 +177,13 @@ class Trainer:
             model_state_dict, optim_state_dict, last_improvement = load(self.model.__class__.__name__)
             self.model.load_state_dict(model_state_dict)
             self.optimizer.load_state_dict(optim_state_dict)
-            self.logger.debug('The model is loaded!')
+            self.logger.info('The model is loaded!')
         else:
             last_improvement = 0
         history, best_bleu = {'acc': [], 'loss': [], 'val_acc': [], 'val_loss': [], 'bleu4': []}, 0.
         for epoch in range(n_epochs):
             if last_improvement == 4:  # Stop training if no improvement since last 4 epochs
-                self.logger.debug('Training Finished - The model has stopped improving since last 4 epochs')
+                self.logger.info('Training Finished - The model has stopped improving since last 4 epochs')
                 break
             if last_improvement > 0:  # Decay LR if no improvement
                 adjust_lr(optimizer=self.optimizer, shrink_factor=0.9, verbose=True, logger=self.logger)
@@ -203,7 +202,7 @@ class Trainer:
             else:
                 last_improvement += 1
                 text += f' - Last improvement since {last_improvement} epoch(s)'
-            self.logger.debug(text)
+            self.logger.info(text)
             # Decrease teacher forcing rate
             tf_ratio = adjust_tf(tf_ratio=tf_ratio, shrink_factor=0.8, verbose=False)
             # Checkpoint

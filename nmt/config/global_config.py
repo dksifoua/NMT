@@ -3,3 +3,4 @@ class GlobalConfig:
     CHECKPOINT_PATH = './checkpoints'
     LOG_PATH = './logs'
     IMG_PATH = './images'
+    SEED = 78

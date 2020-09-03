@@ -1,23 +1,18 @@
-2020-09-02 15:26:50,602 - INFO - LOAD AND CLEAN DATA
-2020-09-02 15:27:39,079 - INFO - Number of examples: 2,007,723
-2020-09-02 15:27:49,315 - INFO - Number of examples after sampling: 200,000
-2020-09-02 15:27:49,316 - INFO - Example:
-	FR => La Commission peut approuver cette proposition, notamment parce que les mesures techniques de mise en œuvre de la directive «MiFID» sont essentielles pour une application efficace de cette directive.
-	EN => The Commission can go along with this, particularly because the technical implementing measures for the MiFID are essential for the effective application of this directive.
-2020-09-02 15:27:50,433 - INFO - Number of examples after filtering: 89,479
-2020-09-02 15:27:50,798 - INFO - BUILD EXAMPLES
-2020-09-02 15:29:28,657 - INFO - Number of examples: 89,479
-2020-09-02 15:29:28,658 - INFO - BUILD DATASETS
-2020-09-02 15:29:28,832 - INFO - train set size: 80,531
-2020-09-02 15:29:28,832 - INFO - valid set size: 4,474
-2020-09-02 15:29:28,860 - INFO - test set size: 4,474
-2020-09-02 15:29:29,056 - INFO - BUILD VOCAB
-2020-09-02 15:29:29,873 - INFO - Length of fr vocabulary: 12,005
-2020-09-02 15:29:29,891 - INFO - BUILD VOCAB
-2020-09-02 15:29:30,567 - INFO - Length of en vocabulary: 9,366
-2020-09-02 15:29:31,109 - INFO - Saved fr_field field.
-2020-09-02 15:29:31,413 - INFO - Saved en_field field.
-2020-09-02 15:29:31,414 - INFO - SAVE DATASETS
-2020-09-02 15:29:59,540 - INFO - Saved train field.
-2020-09-02 15:30:00,942 - INFO - Saved valid field.
-2020-09-02 15:30:02,682 - INFO - Saved test field.
+2020-09-03 09:31:10,423 - INFO - LOAD AND CLEAN DATA
+2020-09-03 09:31:21,591 - INFO - Number of examples: 2,007,723
+2020-09-03 09:31:30,392 - INFO - Number of examples after sampling: 200,000
+2020-09-03 09:31:31,213 - INFO - Number of examples after filtering: 89,554
+2020-09-03 09:31:31,551 - INFO - BUILD EXAMPLES
+2020-09-03 09:32:27,456 - INFO - Number of examples: 89,554
+2020-09-03 09:32:27,457 - INFO - BUILD DATASETS
+2020-09-03 09:32:27,594 - INFO - train set size: 80,599
+2020-09-03 09:32:27,595 - INFO - valid set size: 4,477
+2020-09-03 09:32:27,595 - INFO - test set size: 4,478
+2020-09-03 09:32:28,291 - INFO - Length of fr built vocabulary: 12,097
+2020-09-03 09:32:28,868 - INFO - Length of en built vocabulary: 9,419
+2020-09-03 09:32:29,484 - INFO - Saved fr field.
+2020-09-03 09:32:29,851 - INFO - Saved en field.
+2020-09-03 09:32:29,852 - INFO - SAVE DATASETS
+2020-09-03 09:32:53,534 - INFO - Saved train examples.
+2020-09-03 09:32:54,941 - INFO - Saved valid examples.
+2020-09-03 09:32:56,209 - INFO - Saved test examples.

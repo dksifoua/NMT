@@ -1,0 +1,25 @@
+2020-09-03 10:09:16,713 - INFO - Device: cpu
+2020-09-03 10:09:16,719 - INFO - Load Fields
+2020-09-03 10:09:32,044 - INFO - Init the model
+2020-09-03 10:09:57,431 - INFO - Device: cpu
+2020-09-03 10:09:57,436 - INFO - Load Fields
+2020-09-03 10:10:11,901 - INFO - Init the model
+2020-09-03 10:10:12,042 - INFO - Init the optimizer
+2020-09-03 10:10:12,043 - INFO - Load datasets
+2020-09-03 10:10:12,043 - INFO - Load train dataset
+2020-09-03 10:10:16,569 - INFO - Load valid dataset
+2020-09-03 10:10:19,247 - INFO - Load test dataset
+2020-09-03 10:10:20,068 - INFO - Init trainer
+2020-09-03 10:10:20,076 - INFO - Build data iterators
+2020-09-03 10:10:20,077 - INFO - Start training...
+2020-09-03 10:15:40,003 - INFO - Device: cpu
+2020-09-03 10:15:40,054 - INFO - Load Fields
+2020-09-03 10:15:58,601 - INFO - Init the model
+2020-09-03 10:15:58,730 - INFO - Init the optimizer
+2020-09-03 10:15:58,731 - INFO - Load datasets
+2020-09-03 10:15:58,731 - INFO - Load train dataset
+2020-09-03 10:16:03,623 - INFO - Load valid dataset
+2020-09-03 10:16:03,818 - INFO - Load test dataset
+2020-09-03 10:16:04,031 - INFO - Init trainer
+2020-09-03 10:16:04,031 - INFO - Build data iterators
+2020-09-03 10:16:04,031 - INFO - Start training...
