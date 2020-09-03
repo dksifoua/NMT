@@ -99,7 +99,7 @@ def save(model: nn.Module, optimizer: optim.Optimizer, last_improvement: int, bl
 
 
 def load(model_name: str):
-    state = torch.load(os.path.join(GlobalConfig.CHECKPOINT_PATH, f'Best_{model_name}.pt'))
+    state = torch.load(os.path.join(GlobalConfig.CHECKPOINT_PATH, f'Best_{model_name}.pth'))
     return state.get('model'), state.get('optimizer'), state.get('last_improvement')
 
 

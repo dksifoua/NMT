@@ -66,7 +66,6 @@ class Trainer:
         ax = fig.add_subplot(1, 1, 1)
         ax, lr = lr_finder.plot(ax=ax)
         plt.savefig(os.path.join(GlobalConfig.IMG_PATH, f'SuggestedLR_{model_name}.png'))
-        plt.show()
         if lr is not None:  # Create an optimizer with the suggested LR
             self.optimizer = optim.RMSprop(params=self.model.parameters(), lr=lr)
 

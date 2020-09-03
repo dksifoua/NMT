@@ -3,11 +3,14 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from nmt.config.dataset_config import DatasetConfig
+from nmt.config.global_config import GlobalConfig
 from nmt.config.train_config import TrainConfig
 from nmt.config.model_config import EncoderLSTMConfig, DecoderLSTMConfig
 from nmt.processing.processing import load_dataset, load_field
 from nmt.train.trainer import Trainer
+from nmt.train.train_utils import count_parameters
 from nmt.utils.logger import Logger
+from nmt.utils.utils import seed_everything
 from typing import Any
 
 
@@ -48,6 +51,7 @@ if __name__ == '__main__':
     parser.add_argument('--tf_ratio', action='store', type=str,
                         help=f'The teacher forcing ratio. Default: {TrainConfig.TF_RATIO}.')
     args = parser.parse_args()
+    seed_everything(GlobalConfig.SEED)
     logger = Logger(name=f'Train{args.model}')
     criterion = nn.CrossEntropyLoss()
 
@@ -71,7 +75,8 @@ if __name__ == '__main__':
     #   Add word vector embeddings
     #   Add xavier init weights
     model.to(device)
-    logger.debug(str(model))
+    logger.info(str(model))
+    logger.info(f'Number of parameters of the model: {count_parameters(model):,}')
 
     logger.info('Init the optimizer')
     optimizer = optim.RMSprop(params=model.parameters(), lr=TrainConfig.INIT_LR)
