@@ -86,7 +86,7 @@ def f1_score(logits: torch.FloatTensor, labels: torch.FloatTensor):
     raise NotImplementedError
 
 
-def save(model: nn.Module, optimizer: nn.Module, last_improvement: int, bleu4: float, is_best: bool):
+def save(model: nn.Module, optimizer: optim.optimizer, last_improvement: int, bleu4: float, is_best: bool):
     state = {
         'bleu-4': bleu4,
         'last_improvement': last_improvement,

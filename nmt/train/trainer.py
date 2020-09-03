@@ -1,14 +1,17 @@
 import os
 import tqdm
-import torch
 import numpy as np
+import matplotlib.pyplot as plt
+import torch
 import torch.nn as nn
 import torch.optim as optim
 from torchtext.data import Dataset, Field
 from torchtext.data.metrics import bleu_score
 from torchtext.data.iterator import BucketIterator
 from nmt.train.train_utils import accuracy, adjust_lr, adjust_tf, AverageMeter, clip_gradient, load, save
+from nmt.train.optim_utils import LRFinder
 from nmt.config.global_config import GlobalConfig
+from nmt.config.train_config import TrainConfig
 from nmt.utils.logger import Logger
 
 
@@ -54,6 +57,18 @@ class Trainer:
             sort_within_batch=True,
             device=device
         )
+
+    def lr_finder(self, model_name: str):
+        lr_finder = LRFinder(model=self.model, optimizer=self.optimizer, criterion=self.criterion, logger=self.logger,
+                             grad_clip=TrainConfig.GRAD_CLIP)
+        lr_finder.range_test(data_loader=self.train_iterator, end_lr=TrainConfig.END_LR, n_iters=TrainConfig.N_ITERS)
+        fig = plt.figure(figsize=(15, 5))
+        ax = fig.add_subplot(1, 1, 1)
+        ax, lr = lr_finder.plot(ax=ax)
+        plt.savefig(os.path.join(GlobalConfig.IMG_PATH, f'SuggestedLR_{model_name}.png'))
+        plt.show()
+        if lr is not None:  # Create an optimizer with the suggested LR
+            self.optimizer = optim.RMSprop(params=self.model.parameters(), lr=lr)
 
     def train_step(self, epoch: int, grad_clip: float, tf_ratio: float):
         """
@@ -206,5 +221,6 @@ class Trainer:
             # Decrease teacher forcing rate
             tf_ratio = adjust_tf(tf_ratio=tf_ratio, shrink_factor=0.8, verbose=False)
             # Checkpoint
-            save(model=self.model, optimizer=self.optimizer, last_improvement=last_improvement, bleu4=bleu4)
+            save(model=self.model, optimizer=self.optimizer, last_improvement=last_improvement, bleu4=bleu4,
+                 is_best=bleu4 >= best_bleu)
         return history

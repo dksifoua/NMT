@@ -133,7 +133,6 @@ class LRFinder:
         # Since we decoded starting with <sos>, the targets are all words after <sos>, up to <eos>
         sorted_dest_sequences = sorted_dest_sequences[1:, :]
         # Remove paddings
-        logits_copy = logits.clone()
         logits = nn.utils.rnn.pack_padded_sequence(
             logits,
             sorted_decode_lengths

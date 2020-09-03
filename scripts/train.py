@@ -1,16 +1,12 @@
-import os
 import argparse
-import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from nmt.config.dataset_config import DatasetConfig
-from nmt.config.global_config import GlobalConfig
 from nmt.config.train_config import TrainConfig
 from nmt.config.model_config import EncoderLSTMConfig, DecoderLSTMConfig
 from nmt.processing.processing import load_dataset, load_field
 from nmt.train.trainer import Trainer
-from nmt.train.optim_utils import LRFinder
 from nmt.utils.logger import Logger
 from typing import Any
 
@@ -85,21 +81,15 @@ if __name__ == '__main__':
     valid_dataset = load_dataset(filename='valid', src_field=src_field, dest_field=dest_field, logger=logger)
     test_dataset = load_dataset(filename='test', src_field=src_field, dest_field=dest_field, logger=logger)
 
-    logger.info('Suggest a good learning rate')
-    lr_finder = LRFinder(model=model, optimizer=optimizer, criterion=criterion, logger=logger,
-                         grad_clip=TrainConfig.GRAD_CLIP)
-    lr_finder.range_test(data_loader=train_dataset, end_lr=TrainConfig.END_LR, n_iters=TrainConfig.N_ITERS)
-    fig = plt.figure(figsize=(15, 5))
-    ax = fig.add_subplot(1, 1, 1)
-    ax, lr = lr_finder.plot(ax=ax)
-    plt.savefig(os.path.join(GlobalConfig.IMG_PATH, f'SuggestedLR_{args.model}.png'))
-
     logger.info('Init trainer')
     trainer = Trainer(model=model, optimizer=optimizer, criterion=criterion, dest_field=dest_field,
                       train_data=train_dataset, valid_data=valid_dataset, test_data=test_dataset, logger=logger)
 
     logger.info('Build data iterators')
     trainer.build_data_iterator(batch_size=TrainConfig.BATCH_SIZE, device=device)
+
+    logger.info('Suggest a good learning rate')
+    trainer.lr_finder(model_name=args.model)
 
     logger.info('Start training...')
     history = trainer.train(n_epochs=1, grad_clip=TrainConfig.GRAD_CLIP, tf_ratio=TrainConfig.TF_RATIO)
