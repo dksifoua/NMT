@@ -111,8 +111,6 @@ class Trainer:
             # Update progressbar description
             progress_bar.set_description(
                 f'Epoch: {epoch + 1:03d} - loss: {loss_tracker.average:.3f} - acc: {acc_tracker.average:.3f}%')
-            self.logger.debug(
-                f'Epoch: {epoch + 1:03d} - loss: {loss_tracker.average:.3f} - acc: {acc_tracker.average:.3f}%')
         return loss_tracker.average, acc_tracker.average
 
     def validate(self, epoch: int):
@@ -175,8 +173,6 @@ class Trainer:
                 progress_bar.set_description(
                     f'Epoch: {epoch + 1:03d} - val_loss: {loss_tracker.average:.3f}'
                     f' - val_acc: {acc_tracker.average:.3f}%')
-                self.logger.debug(f'Epoch: {epoch + 1:03d} - val_loss: {loss_tracker.average:.3f}'
-                                  f' - val_acc: {acc_tracker.average:.3f}%')
             # Calculate BLEU-4 score
             bleu4 = bleu_score(hypotheses, references, max_n=4, weights=[0.25, 0.25, 0.25, 0.25])
             # Display some examples
