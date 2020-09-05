@@ -80,16 +80,21 @@ semantic information. The decoder then uses this state to generate the translate
 The sequence-to-sequence model is based on the encoder-decoder architecture to generate a sequence output for a sequence
  input, as demonstrated below. Both the encoder and the decoder commonly use recurrent neural networks (RNNs) to handle 
  sequence inputs of variable length. The hidden state of the encoder is used directly to initialize the decoder hidden 
- state to pass information from the encoder to the decoder.
-
-In this project, I tried several sequence-to-sequence models with LSTMs, Attention mechanisms, CNNs and Transformers.
+ state to pass information from the encoder to the decoder. In this project, I tried several sequence-to-sequence models
+  with LSTMs, Attention mechanisms, CNNs and Transformers.
 
 ## Results
 
 ### Training
 
+```shell
+$ python -m scripts.train --help
+```
+
 ### Evaluation
 
-### Inference
+```shell
+$ python -m scripts.evaluate --help
+```
 
 ## References
