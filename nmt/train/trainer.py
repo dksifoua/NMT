@@ -15,7 +15,7 @@ from nmt.train.train_utils import accuracy, adjust_lr, adjust_tf, AverageMeter, 
 from nmt.train.optim_utils import LRFinder
 from nmt.train.beam_utils import find_best_path, Node
 from nmt.utils.logger import Logger
-from typing import Any
+from typing import Optional
 
 
 class Trainer:
@@ -25,9 +25,9 @@ class Trainer:
     Args:
         model: nn.Module
             The wrapped model.
-        optimizer: Any[optim.Optimizer]
+        optimizer: Optional[optim.Optimizer]
             The wrapped optimizer. Can be None for evaluation and inference phases.
-        criterion: Any[nn.Module]
+        criterion: Optional[nn.Module]
             The wrapped loss function. Can be None for evaluation and inference phases.
         train_data: Dataset
             Train dataset.
@@ -37,7 +37,7 @@ class Trainer:
             Test dataset.
     """
 
-    def __init__(self, model: nn.Module, optimizer: Any[optim.Optimizer], criterion: Any[nn.Module], src_field: Field,
+    def __init__(self, model: nn.Module, optimizer: Optional[optim.Optimizer], criterion: Optional[nn.Module], src_field: Field,
                  dest_field: Field, train_data: Dataset, valid_data: Dataset, test_data: Dataset, logger: Logger):
         self.model = model
         self.optimizer = optimizer
