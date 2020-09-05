@@ -7,7 +7,7 @@ SPACY_CONFIG = {
 class EncoderLSTMConfig:
     EMBEDDING_SIZE = 300
     HIDDEN_SIZE = 256
-    N_LAYERS = 3
+    N_LAYERS = 2
     EMBEDDING_DROPOUT = 0.
     REC_DROPOUT = 0.25
 
@@ -15,7 +15,7 @@ class EncoderLSTMConfig:
 class DecoderLSTMConfig:
     EMBEDDING_SIZE = 300
     HIDDEN_SIZE = 256
-    N_LAYERS = 3
+    N_LAYERS = 2
     EMBEDDING_DROPOUT = 0.
     REC_DROPOUT = 0.25
     DROPOUT = 0.15

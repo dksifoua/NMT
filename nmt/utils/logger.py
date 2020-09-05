@@ -1,6 +1,7 @@
 import os
 import sys
 import logging
+from datetime import datetime
 from nmt.config.global_config import GlobalConfig
 
 
@@ -17,7 +18,8 @@ class Logger:
         console_handler.setFormatter(log_formatter)
         console_handler.setLevel(logging.DEBUG)
 
-        file_handler = logging.FileHandler(os.path.join(GlobalConfig.LOG_PATH, f'{name}.log'))
+        date = datetime.now().strftime("%Y-%m-%d at %Hh-%Mmin")
+        file_handler = logging.FileHandler(os.path.join(GlobalConfig.LOG_PATH, f'{name}-{date}.log'))
         file_handler.setFormatter(log_formatter)
         file_handler.setLevel(logging.INFO)
 
