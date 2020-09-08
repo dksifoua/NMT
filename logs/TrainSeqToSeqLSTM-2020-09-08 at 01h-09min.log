@@ -1,0 +1,133 @@
+2020-09-08 01:09:44,860 - INFO - Device: cuda
+2020-09-08 01:09:44,867 - INFO - Load Fields
+2020-09-08 01:10:02,253 - INFO - Init the model
+2020-09-08 01:10:05,005 - INFO - SeqToSeqLSTM(
+  (encoder): EncoderLayerLSTM(
+    (embeddings): Embedding(12097, 300)
+    (lstm): LSTM(300, 256, num_layers=2, dropout=0.25)
+  )
+  (decoder): DecoderLayerLSTM(
+    (embedding): Embedding(9419, 300)
+    (lstm): LSTM(300, 256, num_layers=2, dropout=0.25)
+    (fc): Linear(in_features=256, out_features=9419, bias=True)
+  )
+)
+2020-09-08 01:10:05,005 - INFO - Number of parameters of the model: 11,070,939
+2020-09-08 01:10:05,006 - INFO - Init the optimizer
+2020-09-08 01:10:05,006 - INFO - Load datasets
+2020-09-08 01:10:05,006 - INFO - Load train dataset
+2020-09-08 01:10:07,729 - INFO - Load valid dataset
+2020-09-08 01:10:07,828 - INFO - Load test dataset
+2020-09-08 01:10:07,932 - INFO - Init trainer
+2020-09-08 01:10:07,932 - INFO - Build data iterators
+2020-09-08 01:10:07,933 - INFO - Suggest a good learning rate
+2020-09-08 01:10:18,123 - INFO - Stopping early, the loss has diverged!
+2020-09-08 01:10:18,186 - INFO - Learning rate search finished. See the graph with {finder_name}.plot()
+2020-09-08 01:10:18,203 - INFO - Suggested LR (steepest gradient): 3.76E-04
+2020-09-08 01:10:18,700 - INFO - Start training...
+2020-09-08 01:12:57,817 - INFO - Predicted translation: the the of the the the the . <eos> <eos> <eos> <eos>
+2020-09-08 01:12:57,817 - INFO - ====================================================================================================
+2020-09-08 01:12:57,817 - INFO - Predicted translation: the is a the the <unk> <unk> <eos> <eos> <eos> <eos> <eos>
+2020-09-08 01:12:57,817 - INFO - ====================================================================================================
+2020-09-08 01:12:57,817 - INFO - Predicted translation: i would i that to to the the the the . . . <eos> <eos> <eos> <eos> <eos> <eos>
+2020-09-08 01:12:57,817 - INFO - ====================================================================================================
+2020-09-08 01:12:57,819 - INFO - BLEU-4: 1.552%
+2020-09-08 01:15:39,395 - INFO - Predicted translation: the the is is is the is . . . <eos> . <eos> . <eos>
+2020-09-08 01:15:39,395 - INFO - ====================================================================================================
+2020-09-08 01:15:39,395 - INFO - Predicted translation: i would therefore to to the to the and . . . <eos>
+2020-09-08 01:15:39,395 - INFO - ====================================================================================================
+2020-09-08 01:15:39,395 - INFO - Predicted translation: the is of the the of of the . . . . <eos>
+2020-09-08 01:15:39,395 - INFO - ====================================================================================================
+2020-09-08 01:15:39,397 - INFO - BLEU-4: 3.520%
+2020-09-08 01:18:21,677 - INFO - Predicted translation: we are are very that this this . . <eos>
+2020-09-08 01:18:21,677 - INFO - ====================================================================================================
+2020-09-08 01:18:21,677 - INFO - Predicted translation: the are the in of of the . . <eos>
+2020-09-08 01:18:21,677 - INFO - ====================================================================================================
+2020-09-08 01:18:21,677 - INFO - Predicted translation: you will you the and the and and you <unk> . . <eos>
+2020-09-08 01:18:21,677 - INFO - ====================================================================================================
+2020-09-08 01:18:21,679 - INFO - BLEU-4: 5.626%
+2020-09-08 01:21:04,667 - INFO - Predicted translation: a is be a , , has been <unk> . <eos>
+2020-09-08 01:21:04,667 - INFO - ====================================================================================================
+2020-09-08 01:21:04,668 - INFO - Predicted translation: however , i am not the the council will be the with . the . the proposals . <eos>
+2020-09-08 01:21:04,668 - INFO - ====================================================================================================
+2020-09-08 01:21:04,668 - INFO - Predicted translation: it is is it the is the the the <eos>
+2020-09-08 01:21:04,668 - INFO - ====================================================================================================
+2020-09-08 01:21:04,671 - INFO - BLEU-4: 7.121%
+2020-09-08 01:23:45,887 - INFO - Predicted translation: the on report on the <unk> <unk> . .
+2020-09-08 01:23:45,887 - INFO - ====================================================================================================
+2020-09-08 01:23:45,887 - INFO - Predicted translation: there of is would to congratulate the . <eos>
+2020-09-08 01:23:45,887 - INFO - ====================================================================================================
+2020-09-08 01:23:45,887 - INFO - Predicted translation: the is been our of the . . the . . . <eos>
+2020-09-08 01:23:45,887 - INFO - ====================================================================================================
+2020-09-08 01:23:45,890 - INFO - BLEU-4: 8.563%
+2020-09-08 01:26:28,138 - INFO - Predicted translation: the us be be the to the <unk> of the . <eos>
+2020-09-08 01:26:28,138 - INFO - ====================================================================================================
+2020-09-08 01:26:28,138 - INFO - Predicted translation: the and and the decisions must be taken . <eos>
+2020-09-08 01:26:28,138 - INFO - ====================================================================================================
+2020-09-08 01:26:28,138 - INFO - Predicted translation: a common of the has . been been . <eos>
+2020-09-08 01:26:28,138 - INFO - ====================================================================================================
+2020-09-08 01:26:28,140 - INFO - BLEU-4: 9.750%
+2020-09-08 01:29:10,814 - INFO - Predicted translation: <unk> , am not that that this is on . <eos>
+2020-09-08 01:29:10,815 - INFO - ====================================================================================================
+2020-09-08 01:29:10,815 - INFO - Predicted translation: the sector of the has has also . has been . the . <eos>
+2020-09-08 01:29:10,815 - INFO - ====================================================================================================
+2020-09-08 01:29:10,815 - INFO - Predicted translation: but is the the , the the member of the member states . <eos>
+2020-09-08 01:29:10,815 - INFO - ====================================================================================================
+2020-09-08 01:29:10,817 - INFO - BLEU-4: 10.770%
+2020-09-08 01:31:54,025 - INFO - Predicted translation: i of i am be the the proposal proposal . <eos>
+2020-09-08 01:31:54,025 - INFO - ====================================================================================================
+2020-09-08 01:31:54,025 - INFO - Predicted translation: one second point point debate debate policy will like to make the the political policy . the policy . . <eos>
+2020-09-08 01:31:54,025 - INFO - ====================================================================================================
+2020-09-08 01:31:54,025 - INFO - Predicted translation: a than than is is to only solution solution . <eos>
+2020-09-08 01:31:54,025 - INFO - ====================================================================================================
+2020-09-08 01:31:54,027 - INFO - BLEU-4: 11.773%
+2020-09-08 01:34:36,794 - INFO - Predicted translation: however , there has a questions that we have a questions questions <eos>
+2020-09-08 01:34:36,794 - INFO - ====================================================================================================
+2020-09-08 01:34:36,794 - INFO - Predicted translation: they have not longer in a political debate . <eos>
+2020-09-08 01:34:36,794 - INFO - ====================================================================================================
+2020-09-08 01:34:36,794 - INFO - Predicted translation: this this this , , be a be to a policy of politics . . <eos>
+2020-09-08 01:34:36,794 - INFO - ====================================================================================================
+2020-09-08 01:34:36,796 - INFO - BLEU-4: 12.458%
+2020-09-08 01:37:18,884 - INFO - Predicted translation: i these is am all the the proposal proposal . <eos>
+2020-09-08 01:37:18,884 - INFO - ====================================================================================================
+2020-09-08 01:37:18,884 - INFO - Predicted translation: when we <unk> <unk> <unk> <unk> <unk> to <unk> <unk> ? <eos>
+2020-09-08 01:37:18,884 - INFO - ====================================================================================================
+2020-09-08 01:37:18,884 - INFO - Predicted translation: this is is the the funds of the funds . funds funds . <eos>
+2020-09-08 01:37:18,884 - INFO - ====================================================================================================
+2020-09-08 01:37:18,886 - INFO - BLEU-4: 13.040%
+2020-09-08 01:40:01,278 - INFO - Predicted translation: this will also the other other other other sector . already already . . . <eos>
+2020-09-08 01:40:01,278 - INFO - ====================================================================================================
+2020-09-08 01:40:01,278 - INFO - Predicted translation: i i want like to say a few to these of . <eos>
+2020-09-08 01:40:01,278 - INFO - ====================================================================================================
+2020-09-08 01:40:01,278 - INFO - Predicted translation: <unk> of am not it quite this will not to <eos>
+2020-09-08 01:40:01,278 - INFO - ====================================================================================================
+2020-09-08 01:40:01,281 - INFO - BLEU-4: 13.342%
+2020-09-08 01:42:44,935 - INFO - Predicted translation: i i want like to say a few about these of . <eos>
+2020-09-08 01:42:44,935 - INFO - ====================================================================================================
+2020-09-08 01:42:44,935 - INFO - Predicted translation: a than costs , is to only solution solution . <eos>
+2020-09-08 01:42:44,935 - INFO - ====================================================================================================
+2020-09-08 01:42:44,935 - INFO - Predicted translation: such can be a , without has been own . <eos>
+2020-09-08 01:42:44,935 - INFO - ====================================================================================================
+2020-09-08 01:42:44,937 - INFO - BLEU-4: 14.012%
+2020-09-08 01:45:27,914 - INFO - Predicted translation: the policy is a on on the production . <eos>
+2020-09-08 01:45:27,914 - INFO - ====================================================================================================
+2020-09-08 01:45:27,914 - INFO - Predicted translation: i also support all the two and the and <unk> . <eos>
+2020-09-08 01:45:27,914 - INFO - ====================================================================================================
+2020-09-08 01:45:27,914 - INFO - Predicted translation: the the single , the single market and be transparency transparency and transparency . <eos>
+2020-09-08 01:45:27,914 - INFO - ====================================================================================================
+2020-09-08 01:45:27,916 - INFO - BLEU-4: 14.406%
+2020-09-08 01:48:11,428 - INFO - Predicted translation: when can we <unk> <unk> our <unk> to <unk> <unk> ? <eos>
+2020-09-08 01:48:11,428 - INFO - ====================================================================================================
+2020-09-08 01:48:11,428 - INFO - Predicted translation: there group should should to congratulate . . <eos>
+2020-09-08 01:48:11,428 - INFO - ====================================================================================================
+2020-09-08 01:48:11,429 - INFO - Predicted translation: it amendments can accept amendments amendments amendments amendments . the . <eos>
+2020-09-08 01:48:11,429 - INFO - ====================================================================================================
+2020-09-08 01:48:11,431 - INFO - BLEU-4: 14.702%
+2020-09-08 01:50:53,162 - INFO - Predicted translation: what are the do the ? the to improve the situation ? <eos>
+2020-09-08 01:50:53,162 - INFO - ====================================================================================================
+2020-09-08 01:50:53,162 - INFO - Predicted translation: i call all for all all of all parties . <eos>
+2020-09-08 01:50:53,162 - INFO - ====================================================================================================
+2020-09-08 01:50:53,162 - INFO - Predicted translation: the the , is is is result is a of reality . reality . <eos>
+2020-09-08 01:50:53,162 - INFO - ====================================================================================================
+2020-09-08 01:50:53,165 - INFO - BLEU-4: 15.012%
+2020-09-08 01:50:53,895 - INFO - Training finished

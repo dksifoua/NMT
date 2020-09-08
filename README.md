@@ -89,12 +89,54 @@ The sequence-to-sequence model is based on the encoder-decoder architecture to g
 
 ```shell
 $ python -m scripts.train --help
+usage: train.py [-h] --model MODEL [--src_lang SRC_LANG]
+                [--dest_lang DEST_LANG] [--batch_size BATCH_SIZE]
+                [--init_lr INIT_LR] [--n_epochs N_EPOCHS]
+                [--grad_clip GRAD_CLIP] [--tf_ratio TF_RATIO]
+
+Train a model
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --model MODEL         The model name (SeqToSeqLSTM, SeqToSeqBiLSTM,
+                        SeqToSeqLuongAttentionLSTM,
+                        SeqToSeqBadhanauAttentionLSTM).
+  --src_lang SRC_LANG   The source language. Default: fr.
+  --dest_lang DEST_LANG
+                        The destination language. Default: en.
+  --batch_size BATCH_SIZE
+                        The batch size. Default: 64.
+  --init_lr INIT_LR     The learning rate. Default: 1e-05.
+  --n_epochs N_EPOCHS   The number of epochs. Default: 15.
+  --grad_clip GRAD_CLIP
+                        The value of gradient clipping. Default: 1.0.
+  --tf_ratio TF_RATIO   The teacher forcing ratio. Default: 1.0.
 ```
+
+| Models                         |learning rate| loss        | val_loss    | acc (%)     | val_acc (%) | bleu-4 (%)  | time/epoch  |
+|:-------------------------------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+| SeqToSeqLSTM                   | 3.76E-04    | 2.753       | 3.125       | 9.942       | 9.382       | 15.012      | 02min 30s   |
+| SeqToSeqBiLSTM                 |             |             |             |             |             |             |             |
+| SeqToSeqLuongAttentionLSTM     |             |             |             |             |             |             |             |
+| SeqToSeqBadhanauAttentionLSTM  |             |             |             |             |             |             |             |
 
 ### Evaluation
 
 ```shell
 $ python -m scripts.evaluate --help
+usage: evaluate.py [-h] --model MODEL [--src_lang SRC_LANG]
+                   [--dest_lang DEST_LANG]
+
+Train a model
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --model MODEL         The model name (SeqToSeqLSTM, SeqToSeqBiLSTM,
+                        SeqToSeqLuongAttentionLSTM,
+                        SeqToSeqBadhanauAttentionLSTM).
+  --src_lang SRC_LANG   The source language. Default: fr.
+  --dest_lang DEST_LANG
+                        The destination language. Default: en.
 ```
 
 ## References
