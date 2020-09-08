@@ -54,7 +54,7 @@ def init_seq_to_seq_luong_attn_model(_module: Any, _src_vocab_size: int, _dest_v
                                                      vocab_size=_src_vocab_size, n_layers=EncoderLSTMConfig.N_LAYERS,
                                                      dropout=EncoderLSTMConfig.EMBEDDING_DROPOUT,
                                                      recurrent_dropout=EncoderLSTMConfig.REC_DROPOUT)
-    attention = getattr(_module, 'LuongDecoderLayerLSTM')(hidden_size=EncoderLSTMConfig.HIDDEN_SIZE)
+    attention = getattr(_module, 'LuongAttentionLayer')(hidden_size=EncoderLSTMConfig.HIDDEN_SIZE)
     decoder = getattr(_module, 'LuongDecoderLayerLSTM')(embedding_size=DecoderLSTMConfig.EMBEDDING_SIZE,
                                                         hidden_size=DecoderLSTMConfig.HIDDEN_SIZE,
                                                         vocab_size=_dest_vocab_size,
@@ -74,7 +74,7 @@ def init_seq_to_seq_badhanau_attn_model(_module: Any, _src_vocab_size: int, _des
                                                      vocab_size=_src_vocab_size, n_layers=EncoderLSTMConfig.N_LAYERS,
                                                      dropout=EncoderLSTMConfig.EMBEDDING_DROPOUT,
                                                      recurrent_dropout=EncoderLSTMConfig.REC_DROPOUT)
-    attention = getattr(_module, 'BadhanauDecoderLayerLSTM')(hidden_size=EncoderLSTMConfig.HIDDEN_SIZE)
+    attention = getattr(_module, 'BadhanauAttentionLayer')(hidden_size=EncoderLSTMConfig.HIDDEN_SIZE)
     decoder = getattr(_module, 'BadhanauDecoderLayerLSTM')(embedding_size=DecoderLSTMConfig.EMBEDDING_SIZE,
                                                            hidden_size=DecoderLSTMConfig.HIDDEN_SIZE,
                                                            vocab_size=_dest_vocab_size,

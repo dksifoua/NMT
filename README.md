@@ -117,7 +117,7 @@ optional arguments:
 |:-------------------------------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 | SeqToSeqLSTM                   | 3.76E-04    | 2.753       | 3.125       | 9.942       | 9.382       | 15.012      | 02min 30s   |
 | SeqToSeqBiLSTM                 | 3.76E-04    | 2.655       | 3.165       | 10.132      | 9.313       | 14.564      | 02min 40s   |
-| SeqToSeqLuongAttentionLSTM     |             |             |             |             |             |             |             |
+| SeqToSeqLuongAttentionLSTM     | 1.87E-04    | 3.226       | 3.491       | 8.897       | 8.645       | 12.027      | 03min 17s   |
 | SeqToSeqBadhanauAttentionLSTM  |             |             |             |             |             |             |             |
 
 ### Evaluation
