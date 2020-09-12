@@ -19,7 +19,7 @@ if __name__ == '__main__':
     parser.add_argument('--min_freq', action='store', type=int, default=DatasetConfig.MIN_FREQ,
                         help=f'The min freq of an words in vocabulary. Default: {DatasetConfig.MIN_FREQ}.')
     parser.add_argument('--save', action='store', type=bool, default=True,
-                        help='To whether or not save datasets and fields.')
+                        help=f'To whether or not save datasets and fields. Default: {True}')
     args = parser.parse_args()
     logger = Logger(name='BuildDatasets')
     pairs = load_and_clean(src_lang=args.src_lang, dest_lang=args.dest_lang, n_samples=args.n_samples,

@@ -206,7 +206,7 @@ class Trainer:
             # Display some examples
             for i in np.random.choice(len(self.valid_iterator), size=3, replace=False):
                 src, dest = ' '.join(references[i][0]), ' '.join(hypotheses[i])
-                self.logger.debug(f'Ground truth translation: {src}')
+                self.logger.info(f'Ground truth translation: {src}')
                 self.logger.info(f'Predicted translation: {dest}')
                 self.logger.info('=' * 100)
         return loss_tracker.average, acc_tracker.average, bleu4

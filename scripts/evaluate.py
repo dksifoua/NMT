@@ -12,8 +12,8 @@ from nmt.train.trainer import Trainer
 from nmt.train.train_utils import count_parameters
 from nmt.utils.logger import Logger
 from nmt.utils.utils import seed_everything
-from scripts import init_seq_to_seq_lstm_model, init_seq_to_seq_bi_lstm_model, init_seq_to_seq_luong_attn_model, \
-    init_seq_to_seq_badhanau_attn_model
+from scripts.train import init_seq_to_seq_lstm_model, init_seq_to_seq_bi_lstm_model, \
+    init_seq_to_seq_luong_attn_model, init_seq_to_seq_badhanau_attn_model
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Train a model')

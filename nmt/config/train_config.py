@@ -1,4 +1,5 @@
 class TrainConfig:
+    FIND_LR = False
     BATCH_SIZE = 64
     INIT_LR = 1e-5
     END_LR = 10

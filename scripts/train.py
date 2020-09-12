@@ -98,6 +98,8 @@ if __name__ == '__main__':
                         help=f'The destination language. Default: {DatasetConfig.DEST_LANG}.')
     parser.add_argument('--batch_size', action='store', type=int,
                         help=f'The batch size. Default: {TrainConfig.BATCH_SIZE}.')
+    parser.add_argument('--suggest_lr', action='store', type=bool,
+                        help=f'Add learning rate finder. Default: {TrainConfig.FIND_LR}')
     parser.add_argument('--init_lr', action='store', type=float,
                         help=f'The learning rate. Default: {TrainConfig.INIT_LR}.')
     parser.add_argument('--n_epochs', action='store', type=str,
@@ -142,7 +144,7 @@ if __name__ == '__main__':
     logger.info(f'Number of parameters of the model: {count_parameters(model):,}')
 
     logger.info('Init the optimizer')
-    optimizer = optim.RMSprop(params=model.parameters(), lr=TrainConfig.INIT_LR)
+    optimizer = optim.Adam(params=model.parameters())
 
     logger.info('Load datasets')
     train_dataset = load_dataset(filename='train', src_field=src_field, dest_field=dest_field, logger=logger)
@@ -156,8 +158,10 @@ if __name__ == '__main__':
     logger.info('Build data iterators')
     trainer.build_data_iterator(batch_size=TrainConfig.BATCH_SIZE, device=device)
 
-    logger.info('Suggest a good learning rate')
-    trainer.lr_finder(model_name=args.model)
+    if args.suggest_lr:
+        optimizer = optim.Adam(params=model.parameters(), lr=TrainConfig.INIT_LR)
+        logger.info('Suggest a good learning rate')
+        trainer.lr_finder(model_name=args.model)
 
     logger.info('Start training...')
     history = trainer.train(n_epochs=TrainConfig.N_EPOCHS, grad_clip=TrainConfig.GRAD_CLIP,

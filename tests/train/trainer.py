@@ -4,7 +4,6 @@ import unittest
 class TestTrainer(unittest.TestCase):
 
     def setUp(self) -> None:
-        # TODO
         pass
 
     def test_build_data_iterator(self):

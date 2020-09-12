@@ -1,0 +1,18 @@
+2020-09-12 05:05:05,323 - INFO - LOAD AND CLEAN DATA
+2020-09-12 05:05:31,966 - INFO - Number of examples: 2,007,723
+2020-09-12 05:06:14,242 - INFO - Number of examples after sampling: 200,000
+2020-09-12 05:06:15,486 - INFO - Number of examples after filtering: 163,145
+2020-09-12 05:06:16,160 - INFO - BUILD EXAMPLES
+2020-09-12 05:08:20,106 - INFO - Number of examples: 163,145
+2020-09-12 05:08:20,106 - INFO - BUILD DATASETS
+2020-09-12 05:08:20,453 - INFO - train set size: 146,830
+2020-09-12 05:08:20,453 - INFO - valid set size: 8,158
+2020-09-12 05:08:20,486 - INFO - test set size: 8,157
+2020-09-12 05:08:22,761 - INFO - Length of fr built vocabulary: 19,014
+2020-09-12 05:08:24,191 - INFO - Length of en built vocabulary: 14,387
+2020-09-12 05:08:26,112 - INFO - Saved fr field.
+2020-09-12 05:08:26,729 - INFO - Saved en field.
+2020-09-12 05:08:26,730 - INFO - SAVE DATASETS
+2020-09-12 05:13:51,964 - INFO - Saved train examples.
+2020-09-12 05:14:08,273 - INFO - Saved valid examples.
+2020-09-12 05:14:11,933 - INFO - Saved test examples.

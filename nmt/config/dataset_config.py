@@ -3,5 +3,5 @@ class DatasetConfig:
     DEST_LANG = 'en'
     N_SAMPLES = 200_000
     MIN_LEN = 10
-    MAX_LEN = 25
+    MAX_LEN = 50
     MIN_FREQ = 5
