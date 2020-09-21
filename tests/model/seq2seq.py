@@ -3,7 +3,7 @@ import torch
 from nmt.model.encoder import EncoderLayerLSTM, EncoderLayerBiLSTM
 from nmt.model.attention import LuongAttentionLayer, BadhanauAttentionLayer
 from nmt.model.decoder import DecoderLayerLSTM, LuongDecoderLayerLSTM, BadhanauDecoderLayerLSTM
-from nmt.model.seq2seq import SeqToSeqLSTM, SeqToSeqBiLSTM, SeqToSeqLuongAttentionLSTM, SeqToSeqBadhanauAttentionLSTM
+from nmt.model.seq2seq_lstm import SeqToSeqLSTM, SeqToSeqBiLSTM, SeqToSeqLuongAttentionLSTM, SeqToSeqBadhanauAttentionLSTM
 
 
 class TestSeqToSeqLSTM(unittest.TestCase):
